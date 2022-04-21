@@ -14,12 +14,24 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
+  dio: ^4.0.4
+  fpdart: ^0.0.12
+  get_it: ^7.2.0
+  equatable: ^2.0.3
+  flutter_bloc: ^8.0.0
+  internet_connection_checker: ^0.0.1+3
+  percent_indicator: ^4.0.0
+  shared_preferences: ^2.0.8
+
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
   flutter_lints: ^1.0.0
+  mockito: ^5.0.16
+  build_runner: ^2.1.5
+  bloc_test: ^9.0.0
+  test: ^1.19.0
 
 flutter:
   uses-material-design: true
@@ -30,3 +42,12 @@ flutter:
   assets:
     # Add assets from the images directory to the application.
     - assets/images/
+
+  fonts:
+    - family: Billabong
+      fonts:
+        - asset: assets/fonts/Billabong.ttf
+    - family: Pico
+      fonts:
+        - asset: assets/fonts/PICOWA__.TTF
+        - asset: assets/fonts/PICOBLA_.TTF
