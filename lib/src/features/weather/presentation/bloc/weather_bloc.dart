@@ -119,14 +119,13 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
     if (!(messageTimer?.isActive ?? false)) {
       messageTimer = Timer.periodic(const Duration(milliseconds: 3000), (_) {
         loadingMessageNumber += 1;
-
+        if (loadingMessageNumber > 2) {
+          loadingMessageNumber = 0;
+        }
         add(TimerTicked(
           percent: percent,
           loadingMessage: loadingMessages[loadingMessageNumber],
         ));
-        if (loadingMessageNumber > 2) {
-          loadingMessageNumber = 0;
-        }
       });
     }
 
