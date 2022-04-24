@@ -1,3 +1,4 @@
+import 'package:exomind/src/features/weather/data/models/current_weather_data_model.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:exomind/src/features/weather/data/data_sources/weather_local_data_source.dart';
 import 'package:exomind/src/features/weather/data/data_sources/weather_remote_data_source.dart';
@@ -18,15 +19,26 @@ class WeatherRepositoryImpl implements WeatherRepository {
     required this.networkInfo,
   });
 
+  List<CurrentWeatherDataModel> citiesCurrentWeather =
+      <CurrentWeatherDataModel>[];
+  int cityNumber = 0;
+
   @override
-  Future<Either<Failure, CurrentWeatherData>> getCurrentWeatherData(
+  Future<Either<Failure, List<CurrentWeatherData>>> getCurrentWeatherData(
       String city) async {
     if (await networkInfo.isConnected) {
       try {
+        if (cityNumber == 5) {
+          cityNumber = 0;
+          citiesCurrentWeather = <CurrentWeatherDataModel>[];
+        }
+        cityNumber++;
+        print(cityNumber);
         final remoteCurrentWeatherData =
             await remoteDataSource.getCurrentWeatherData(city);
-        localDataSource.cacheCurrentWeatherData(remoteCurrentWeatherData);
-        return Right(remoteCurrentWeatherData);
+        citiesCurrentWeather.add(remoteCurrentWeatherData);
+        localDataSource.cacheCurrentWeatherData(citiesCurrentWeather);
+        return Right(citiesCurrentWeather);
       } on ServerException {
         return Left(ServerFailure());
       }

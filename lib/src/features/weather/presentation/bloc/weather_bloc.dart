@@ -56,7 +56,7 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
   }
 
   void _eitherLoadedOrErrorState(
-    Either<Failure, CurrentWeatherData> failureOrCurrentWeatherData,
+    Either<Failure, List<CurrentWeatherData>> failureOrCurrentWeatherData,
     Emitter<WeatherState> emit,
   ) {
     failureOrCurrentWeatherData.fold(
@@ -66,7 +66,7 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
         ),
       ),
       (currentWeather) {
-        currentWeatherDataList.add(currentWeather);
+        currentWeatherDataList = currentWeather;
       },
     );
   }

@@ -6,13 +6,14 @@ import 'package:exomind/src/features/weather/domain/repositories/weather_reposit
 import '../../../../core/error/failures.dart';
 import '../../../../core/use_cases/use_cases.dart';
 
-class GetCurrentWeatherData implements UseCase<CurrentWeatherData, Params> {
+class GetCurrentWeatherData
+    implements UseCase<List<CurrentWeatherData>, Params> {
   final WeatherRepository repository;
 
   GetCurrentWeatherData(this.repository);
 
   @override
-  Future<Either<Failure, CurrentWeatherData>> call(Params params) async {
+  Future<Either<Failure, List<CurrentWeatherData>>> call(Params params) async {
     return await repository.getCurrentWeatherData(params.city);
   }
 }
