@@ -40,7 +40,7 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
 
   WeatherBloc({
     required this.getCurrentWeatherData,
-  }) : super(WeatherInitial()) {
+  }) : super(const WeatherInitial()) {
     on<GetCurrentWeather>(_onGetCurrentWeather);
     on<TimerTicked>(_onTimerTicked);
     on<TimerEnded>(_onTimerEnded);

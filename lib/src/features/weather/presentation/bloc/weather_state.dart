@@ -1,10 +1,15 @@
 part of 'weather_bloc.dart';
 
 abstract class WeatherState extends Equatable {
-  const WeatherState();
+  final bool _isLoading;
+
+  const WeatherState(this._isLoading);
+  bool get isLoading => _isLoading;
 }
 
 class WeatherInitial extends WeatherState {
+  const WeatherInitial() : super(false);
+
   @override
   List<Object> get props => [];
 }
@@ -12,7 +17,8 @@ class WeatherInitial extends WeatherState {
 class WeatherLoading extends WeatherState {
   final int percent;
   final String loadingMessage;
-  const WeatherLoading({required this.percent, required this.loadingMessage});
+  const WeatherLoading({required this.percent, required this.loadingMessage})
+      : super(true);
 
   @override
   List<Object> get props => [percent, loadingMessage];
@@ -20,7 +26,7 @@ class WeatherLoading extends WeatherState {
 
 class WeatherLoaded extends WeatherState {
   final List<CurrentWeatherData> currentWeatherDataList;
-  const WeatherLoaded({required this.currentWeatherDataList});
+  const WeatherLoaded({required this.currentWeatherDataList}) : super(true);
 
   @override
   List<Object> get props => [currentWeatherDataList];
@@ -28,7 +34,7 @@ class WeatherLoaded extends WeatherState {
 
 class WeatherError extends WeatherState {
   final String message;
-  const WeatherError({required this.message});
+  const WeatherError({required this.message}) : super(false);
 
   @override
   List<Object> get props => [message];

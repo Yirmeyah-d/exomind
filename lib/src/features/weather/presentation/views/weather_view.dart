@@ -21,7 +21,6 @@ class _WeatherViewState extends State<WeatherView>
     rotationController =
         AnimationController(duration: const Duration(seconds: 1), vsync: this)
           ..repeat();
-    BlocProvider.of<WeatherBloc>(context).add(GetCurrentWeather());
     super.initState();
   }
 
@@ -163,6 +162,7 @@ class _WeatherViewState extends State<WeatherView>
           // Je pourrais faire un component dédier à l'affichage du message d'erreur mais afin d'aller plus vite je ne l'ai pas fait.
           return Center(child: Text(state.message));
         } else {
+          BlocProvider.of<WeatherBloc>(context).add(GetCurrentWeather());
           return Stack(
             children: [
               Center(
