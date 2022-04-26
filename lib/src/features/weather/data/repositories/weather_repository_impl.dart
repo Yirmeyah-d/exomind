@@ -33,7 +33,6 @@ class WeatherRepositoryImpl implements WeatherRepository {
           citiesCurrentWeather = <CurrentWeatherDataModel>[];
         }
         cityNumber++;
-        print(cityNumber);
         final remoteCurrentWeatherData =
             await remoteDataSource.getCurrentWeatherData(city);
         citiesCurrentWeather.add(remoteCurrentWeatherData);
